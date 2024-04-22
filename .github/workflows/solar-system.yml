@@ -134,6 +134,7 @@ jobs:
             |
               echo "INGRESS_IP=$(kubectl -n ingress-nginx get services ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")" >>${GITHUB_ENV}
         
+
         - name: Replace Placeholders
           uses: cschleiden/replace-tokens@v1
           with:
@@ -149,11 +150,18 @@ jobs:
           run: 
             |
             cat kubernetes/development/*.yaml
+        # - name: Get Ingress URL
+        # run:
+        #   |
+        #     echo "INGRESS_URL=$(kubectl)"
     
-    # integration-test:
-    #   name: Dev-Integration Test
-    #   uses: ./.github/workflows/reusable-workflow.yml
-
+    integration-test:
+      needs: dev-deploy
+      name: Dev-Integration Test
+      uses: ./.github/workflows/reusable-workflow.yml
+      with:
+        ingress-url: ${{ needs.dev-deploy.outputs.APP_INGRESS_URL }}
+      
 
 
 
