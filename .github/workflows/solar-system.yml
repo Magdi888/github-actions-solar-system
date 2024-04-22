@@ -128,7 +128,7 @@ jobs:
         - name: Check Kubectl version
           run: 
             |
-              kubectl version --short -o yaml
+              kubectl version 
         - name: Get Ingress IP
           run:
             |
