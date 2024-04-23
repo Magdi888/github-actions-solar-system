@@ -21,7 +21,7 @@ jobs:
           uses: actions/checkout@v4
 
         - name: NPM custom action
-          uses: ./.github/workflows/custom-action/node-modules
+          uses: .github/workflows/custom-action/node-modules
           with:
             node-modules-dir: ~/.npm
 
@@ -48,10 +48,10 @@ jobs:
             node-version: 18
     
         - name: NPM custom action
-          uses: ./.github/workflows/custom-action/node-modules
+          uses: .github/workflows/custom-action/node-modules
           with:
             node-modules-dir: ~/.npm
-            
+
         - name: Code Coverage
           continue-on-error: true
           run: npm run coverage
